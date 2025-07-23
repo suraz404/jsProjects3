@@ -34,5 +34,10 @@ const handleColor2=()=>{
 const copyChange=()=>{
  divCopy.textContent=` background-image: linear-gradient(to right, ${rgb1}, ${rgb2})`;
 }
+
 color1.addEventListener("click",handleColor1);
 color2.addEventListener("click",handleColor2);
+divCopy.addEventListener("click",()=>{
+    navigator.clipboard.writeText(divCopy.innerText);
+    alert("text copied")
+});

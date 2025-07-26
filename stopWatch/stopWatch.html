@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Stopwatch UI</title>
+  <link rel="stylesheet" href="stopWatch.css" />
+</head>
+<body>
+  <div class="container">
+    <div class="stopwatch">
+      <h1 id="display">0</h1>
+      <div class="buttons">
+        <button class="start_btn">Start</button>
+        <button class="reset_btn">Reset</button>
+        <button class="stop_btn">Stop</button>
+        <button class="getTime_btn">getTime</button>
+        <button class="clear_btn">clearTime</button>
+      </div>
+       <div class="resetValue"></div>
+    </div>
+    <div class="resetValue"></div>
+  </div>
+  <script>
+
+
+    const countDownElement = document.getElementById('display');
+    const startButton = document.querySelector('.start_btn');
+    const resetButton = document.querySelector('.reset_btn');
+    const stopButton = document.querySelector('.stop_btn');
+    const getTimeButton = document.querySelector('.getTime_btn');
+    const clearTimeButton = document.querySelector('.clear_btn');
+    const resetValueElement = document.querySelector('.resetValue');
+
+    let count =0;
+    let intervalId = null;
+    //function to start the timer
+    function startTimer() {
+        if (intervalId) return; // Prevent multiple intervals
+        intervalId = setInterval(() => {
+            count++;
+            countDownElement.textContent = count;
+        }, 1000);
+    }   
+    //function to reset the timer
+    function resetTimer() {
+        count = 0;
+        countDownElement.textContent = count;
+        resetValueElement.textContent = '';
+        clearInterval(intervalId);          
+        intervalId = null;
+    }
+    //function to stop the timer
+    function stopTimer() {
+        clearInterval(intervalId);
+        intervalId = null;
+    }
+    //function to get the current time
+    function getTime() {
+        let newP=document.createElement('p');
+        newP.innerHTML=`the stop time is ${count}`;
+        resetValueElement.append(newP);
+
+    }
+    //function to clear the time
+    function clearTime() {
+        resetValueElement.textContent = '';
+    } 
+
+        
+
+
+   startButton.addEventListener("click",startTimer);
+   resetButton.addEventListener("click",resetTimer);
+    stopButton.addEventListener("click",stopTimer);
+    getTimeButton.addEventListener("click",getTime);
+    clearTimeButton.addEventListener("click",clearTime);
+
+   
+   </script>
+</body>
+</html>
